@@ -15,3 +15,17 @@
 /Users/stevendaniel/Desktop/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/Xamarin.Forms.Maps.dll
 /Users/stevendaniel/Desktop/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/TrackMyWalks.dll
 /Users/stevendaniel/Desktop/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/TrackMyWalks.dll.mdb
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/obj/iPhoneSimulator/Debug/Xamarin.iOS,Version=v1.0.AssemblyAttribute.cs
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/obj/iPhoneSimulator/Debug/optimized/
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/TrackMyWalks.iOS.exe.mdb
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/TrackMyWalks.iOS.exe
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/obj/iPhoneSimulator/Debug/TrackMyWalks.iOS.exe
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/obj/iPhoneSimulator/Debug/TrackMyWalks.iOS.exe.mdb
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/Xamarin.Forms.Platform.iOS.dll
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/Xamarin.Forms.Core.dll
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/Xamarin.Forms.Xaml.dll
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/Xamarin.Forms.Platform.dll
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/Xamarin.Forms.Maps.iOS.dll
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/Xamarin.Forms.Maps.dll
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/TrackMyWalks.dll
+/Users/jeremy/Documents/Projects/Mastering-Xamarin-UI-Development/Chapter 01/TrackMyWalks/iOS/bin/iPhoneSimulator/Debug/TrackMyWalks.dll.mdb

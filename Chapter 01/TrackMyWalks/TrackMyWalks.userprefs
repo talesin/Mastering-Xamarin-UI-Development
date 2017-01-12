@@ -1,7 +1,13 @@
 ﻿<Properties StartupConfiguration="{0AE9F8DD-9F96-4F67-84FE-C568A500821B}|Default">
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Main.cs">
+    <Files>
+      <File FileName="TrackMyWalks/TrackMyWalks.cs" Line="1" Column="1" />
+      <File FileName="TrackMyWalks/Models/WalkEntries.cs" Line="1" Column="1" />
+      <File FileName="iOS/Main.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.TrackMyWalks.Droid PreferredExecutionTarget="Android.Nexus 5 (Lollipop)" />
-  <MonoDevelop.Ide.ItemProperties.TrackMyWalks.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.DDC14C62-8196-4E08-AD55-71BDB6810A5C" />
+  <MonoDevelop.Ide.ItemProperties.TrackMyWalks.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.E86DB9B5-66BC-4188-AECA-34624421F59F" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
