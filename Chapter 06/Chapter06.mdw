@@ -1,0 +1,7 @@
+<WorkspaceItem ctype="Workspace">
+  <Items>
+    <Item>BookLibrary/BookLibrary/BookLibrary.sln</Item>
+    <Item>BookLibrary/BookLibrary.Droid/BookLibrary.Droid.sln</Item>
+    <Item>BookLibrary/BookLibrary.iOS/BookLibrary.iOS.sln</Item>
+  </Items>
+</WorkspaceItem>

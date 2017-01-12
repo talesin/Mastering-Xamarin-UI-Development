@@ -5,8 +5,6 @@
 //
 // Copyright (c) 2017 Jeremy Clough
 //
-// You may not use, modify or distribute this file, or any part of it, without prior consent and offers of beer.
-//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
