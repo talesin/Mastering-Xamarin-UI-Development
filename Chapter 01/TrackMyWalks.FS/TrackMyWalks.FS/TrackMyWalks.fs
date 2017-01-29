@@ -1,5 +1,5 @@
 ﻿//
-// TrackMyWalks.FS.fs
+// TrackMyWalks.fs
 //
 // Author: Jeremy Clough <jeremy@talesin.net>
 //
@@ -17,6 +17,7 @@ namespace TrackMyWalks.FS
 open System
 open System.Threading.Tasks
 open Xamarin.Forms
+open Xamarin.Forms.Maps
 
 [<AutoOpen>]
 module FormsHelper =
@@ -38,7 +39,7 @@ module FormsHelper =
         (event element).AddHandler(fun _ a -> fn a)
         element
 
-    let (|>->) element fn =
+    let (|>|) element fn =
         fn element
         element
 
@@ -65,35 +66,116 @@ type WalkEntry = {
         Kilometres: double
         Difficulty: string
         Distance: double
-        ImageUrl: string
+        ImageUrl: Uri
     }
 
 type DistanceTravelledPage(walk: WalkEntry) as this =
     inherit ContentPage()
 
+    let (views:View list) = [
+            Maps.Map()
+                |>| fun x -> x.Pins.Add(Pin(    Type = PinType.Place,
+                                                Label = walk.Title,
+                                                Position = Position(walk.Latitude, walk.Longitude)))
+                |>| fun x -> x.MoveToRegion(MapSpan.FromCenterAndRadius(Position(walk.Latitude, walk.Longitude), Distance.FromKilometers(1.0)))
+
+            Label(  FontSize = 18.0,
+                    FontAttributes = FontAttributes.Bold,
+                    TextColor = Color.Black,
+                    Text = walk.Title)
+
+            Label(  FontAttributes = FontAttributes.Bold,
+                    FontSize = 20.0,
+                    TextColor = Color.Black,
+                    Text = "Distance Travelled",
+                    HorizontalTextAlignment = TextAlignment.Center)
+
+            Label(  FontAttributes = FontAttributes.Bold,
+                    FontSize = 20.0,
+                    TextColor = Color.Black,
+                    Text = sprintf "%f km" walk.Distance,
+                    HorizontalTextAlignment = TextAlignment.Center)
+
+            Label(  FontAttributes = FontAttributes.Bold,
+                    FontSize = 20.0,
+                    TextColor = Color.Black,
+                    Text = "Time Taken:",
+                    HorizontalTextAlignment = TextAlignment.Center)
+
+            Label(  FontAttributes = FontAttributes.Bold,
+                    FontSize = 20.0,
+                    TextColor = Color.Black,
+                    Text = "0h 0m 0s",
+                    HorizontalTextAlignment = TextAlignment.Center)
+
+            Button( BackgroundColor = Color.FromHex("#008080"),
+                    TextColor = Color.White,
+                    Text = "End this Trail")
+                    |> addHandler
+                        (fun x -> x.Clicked)
+                        (fun _ -> this.Navigation.AsyncPopToRoot(true))
+        ]
+
     do
-        ()
+        this.Title <- "Distance Travelled"
+
+        this.Content <-
+            ScrollView( Padding = Thickness 10.0,
+                        Content =
+                            (StackLayout(   Orientation = StackOrientation.Vertical,
+                                            HorizontalOptions = LayoutOptions.FillAndExpand)
+                                            |> addChildren views))
 
 type WalksTrailPage(walk: WalkEntry option) as this =
     inherit ContentPage()
 
+    let (views:View list) =
+        match walk with
+        | None -> []
+        | Some w ->
+            [   Image(  Aspect = Aspect.AspectFill,
+                        Source = ImageSource.FromUri w.ImageUrl)
+
+                Label(  FontSize = 28.0,
+                        FontAttributes = FontAttributes.Bold,
+                        TextColor = Color.Black,
+                        Text = w.Title)
+
+                Label(  FontAttributes = FontAttributes.Bold,
+                        FontSize = 12.0,
+                        TextColor = Color.Black,
+                        Text = sprintf "Length: %f km" w.Kilometres)
+
+                Label(  FontAttributes = FontAttributes.Bold,
+                        FontSize = 12.0,
+                        TextColor = Color.Black,
+                        Text = sprintf "Difficulty: %s" w.Difficulty)
+
+                Label(  FontSize = 11.0,
+                        TextColor = Color.Black,
+                        Text = w.Notes,
+                        HorizontalOptions = LayoutOptions.FillAndExpand)
+
+                Button( BackgroundColor = Color.FromHex("#008080"),
+                        TextColor = Color.White,
+                        Text = "Begin this Trail")
+                        |> addHandler
+                            (fun x -> x.Clicked)
+                            (fun _ -> 
+                                    this.Navigation.AsyncPush(DistanceTravelledPage(w))
+                                    this.Navigation.RemovePage(this))]
+
     do
         this.Title <- "Walks Trail"
 
-        let button =
-            Button(
-                BackgroundColor = Color.FromHex("#008080"),
-                TextColor = Color.White,
-                Text = "Begin this Trail")
-            |> addHandler
-                (fun x -> x.Clicked)
-                (fun _ -> match walk with
-                            | None -> ()
-                            | Some x ->
-                                this.Navigation.AsyncPush(DistanceTravelledPage(x))
-                                this.Navigation.RemovePage(this))
-                        
-        ()
+        this.Content <-
+            ScrollView(
+                Padding = Thickness 10.0,
+                Content =
+                    (StackLayout(
+                        Orientation = StackOrientation.Vertical,
+                        HorizontalOptions = LayoutOptions.FillAndExpand)
+                        |> addChildren views))
 
     new(o: obj) =
         WalksTrailPage (optcast<WalkEntry> o)
@@ -144,7 +226,7 @@ type WalksPage() as this =
                         Kilometres  = 7.5
                         Difficulty  = "Medium"
                         Distance    = 0.0
-                        ImageUrl    = "http://trailswa.com.au/media/cache/media/images/trails/_mid/FullSizeRender1_600_480_c1.jpg"};
+                        ImageUrl    = Uri "http://trailswa.com.au/media/cache/media/images/trails/_mid/FullSizeRender1_600_480_c1.jpg"};
                     
                     {   Title  = "Ancient Empire Walk, Valley of the Giants"
                         Notes  = "The Ancient Empire is a 450 metre walk trail that takes you around and through some of the giant tingle trees including the most popular of the gnarled veterans, known as Grandma Tingle."
@@ -153,13 +235,13 @@ type WalksPage() as this =
                         Kilometres = 450.0
                         Distance   = 0.0
                         Difficulty = "Hard"
-                        ImageUrl   = "http://trailswa.com.au/media/cache/media/images/trails/_mid/Ancient_Empire_534_480_c1.jpg"}]
+                        ImageUrl   = Uri "http://trailswa.com.au/media/cache/media/images/trails/_mid/Ancient_Empire_534_480_c1.jpg"}]
 
         let tmpl =
             DataTemplate(typeof<ImageCell>)
-            |>-> fun x -> x.SetBinding(TextCell.TextProperty, "Title")
-            |>-> fun x -> x.SetBinding(TextCell.DetailProperty, "Notes")
-            |>-> fun x -> x.SetBinding(ImageCell.ImageSourceProperty, "ImageUrl")
+            |>| fun x -> x.SetBinding(TextCell.TextProperty, "Title")
+            |>| fun x -> x.SetBinding(TextCell.DetailProperty, "Notes")
+            |>| fun x -> x.SetBinding(ImageCell.ImageSourceProperty, "ImageUrl")
 
 
         let list =
@@ -214,4 +296,4 @@ type App() =
         if Device.OS = TargetPlatform.Android then
             base.MainPage <- SplashPage()
         else
-            base.MainPage <- new NavigationPage(WalksPage(), Title = "Track My Walks")
+            base.MainPage <- new NavigationPage(WalksPage(Title = "Track My Walks (F#)"))
