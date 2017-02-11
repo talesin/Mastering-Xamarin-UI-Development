@@ -26,6 +26,7 @@ type AppDelegate () =
 
     override this.FinishedLaunching (app, options) =
         Forms.Init()
+        Xamarin.FormsMaps.Init()
         this.LoadApplication (new TrackMyWalks.FS.App())
         base.FinishedLaunching(app, options)
 
