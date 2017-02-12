@@ -19,6 +19,7 @@ open System.Threading.Tasks
 open Xamarin.Forms
 open Xamarin.Forms.Maps
 
+
 [<AutoOpen>]
 module FormsHelper =
     let inline add< ^b, ^a when ^a : (member Add: ^b -> unit)> (items:^b list) element =
@@ -29,14 +30,6 @@ module FormsHelper =
     let addChildren items (element:'a when 'a :> Layout<_>) =
         items
         |> List.iter element.Children.Add
-        element
-
-    let addHandler (event:'a -> IEvent<EventHandler,EventArgs>) fn (element:'a) =
-        (event element).AddHandler(fun _ a -> fn a)
-        element
-
-    let addHandler' (event:'a -> IEvent<EventHandler<'b>,'b>) fn (element:'a) =
-        (event element).AddHandler(fun _ a -> fn a)
         element
 
     let (|>|) element fn =
@@ -59,14 +52,14 @@ module FormsHelper =
 
 
 type WalkEntry = {
-        Title: string
-        Notes: string
-        Latitude: double
-        Longitude: double
+        Title:      string
+        Notes:      string
+        Latitude:   double
+        Longitude:  double
         Kilometres: double
         Difficulty: string
-        Distance: double
-        ImageUrl: Uri
+        Distance:   double
+        ImageUrl:   Uri
     }
 
 type DistanceTravelledPage(walk: WalkEntry) as this =
@@ -111,9 +104,7 @@ type DistanceTravelledPage(walk: WalkEntry) as this =
             Button( BackgroundColor = Color.FromHex("#008080"),
                     TextColor = Color.White,
                     Text = "End this Trail")
-                    |> addHandler
-                        (fun x -> x.Clicked)
-                        (fun _ -> this.Navigation.AsyncPopToRoot(true))
+                    |>| fun x -> x.Clicked.AddHandler(fun _ _ -> this.Navigation.AsyncPopToRoot(true))
         ]
 
     do
@@ -159,11 +150,9 @@ type WalksTrailPage(walk: WalkEntry option) as this =
                 Button( BackgroundColor = Color.FromHex("#008080"),
                         TextColor = Color.White,
                         Text = "Begin this Trail")
-                        |> addHandler
-                            (fun x -> x.Clicked)
-                            (fun _ -> 
-                                    this.Navigation.AsyncPush(DistanceTravelledPage(w))
-                                    this.Navigation.RemovePage(this))]
+                        |>| fun x -> x.Clicked.AddHandler(fun _ _ ->
+                            this.Navigation.AsyncPush(DistanceTravelledPage(w))
+                            this.Navigation.RemovePage(this))]
 
     do
         this.Title <- "Walks Trail"
@@ -207,7 +196,7 @@ type WalksEntryPage() as this =
 
 
         ToolbarItem(Text = "Save")
-        |> addHandler (fun x -> x.Clicked) (fun _ -> this.Navigation.AsyncPopToRoot(true))
+        |>| fun x -> x.Clicked.AddHandler(fun _ _ -> this.Navigation.AsyncPopToRoot(true))
         |> this.ToolbarItems.Add
 
 
@@ -216,7 +205,7 @@ type WalksPage() as this =
 
     do
         ToolbarItem(Text = "Add Walk")
-        |> addHandler (fun x -> x.Clicked) (fun _ -> this.Navigation.AsyncPush(WalksEntryPage()))
+        |>| fun x -> x.Clicked.AddHandler(fun _ _ -> this.Navigation.AsyncPush(WalksEntryPage()))
         |> this.ToolbarItems.Add
 
         let walks = [{  Title  = "10 Mile Brook Trail, Margaret River"
@@ -250,9 +239,7 @@ type WalksPage() as this =
                 ItemTemplate = tmpl,
                 ItemsSource = walks,
                 SeparatorColor = Color.FromHex("#ddd"))
-            |> addHandler'
-                (fun x -> x.ItemTapped)
-                (fun a -> if a.Item <> null then this.Navigation.AsyncPush(WalksTrailPage(a.Item)))
+            |>| fun x -> x.ItemTapped.AddHandler(fun _ a -> if a.Item <> null then this.Navigation.AsyncPush(WalksTrailPage(a.Item)))
 
         
         this.Content <- list
