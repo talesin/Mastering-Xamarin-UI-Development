@@ -11,5 +11,20 @@ module WalksPageViewModelTests =
     let ``Walk entries initialized correctly`` () =
         let m = new WalksPageViewModel()
 
-        Assert.True(m.Entries.Count = 2)
+        Assert.True(m.WalkEntries.Count = 2)
 
+
+     
+
+[<TestFixture>]
+module WalkEntryViewModel =
+
+    [<Test>]
+    let ``Walk entry title set as expected`` () =
+        let we = WalkEntryViewModel()
+
+        let expected = "walk entry title"
+
+        we.Title <- expected
+
+        Assert.AreEqual(expected, we.Title)

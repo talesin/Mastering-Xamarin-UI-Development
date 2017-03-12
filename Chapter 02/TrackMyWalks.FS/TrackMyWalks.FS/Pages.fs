@@ -153,26 +153,28 @@ type WalksEntryPage() as this =
                 |> add [
                     (TableSection())
                     |> add [
-                        (EntryCell(Label = "Title:", Placeholder = "Trail Title"))
+                        EntryCell(Label = "Title:", Placeholder = "Trail Title")
                         |>| fun x -> x.SetBinding(EntryCell.TextProperty, "Title", BindingMode.TwoWay)
 
-                        (EntryCell(Label = "Notes:", Placeholder = "Description"))
+                        EntryCell(Label = "Notes:", Placeholder = "Description")
                         |>| fun x -> x.SetBinding(EntryCell.TextProperty, "Notes", BindingMode.TwoWay)
 
-                        (EntryCell(Label = "Latitude:", Placeholder = "Latitude", Keyboard = Keyboard.Numeric))
+                        EntryCell(Label = "Latitude:", Placeholder = "Latitude", Keyboard = Keyboard.Numeric)
                         |>| fun x -> x.SetBinding(EntryCell.TextProperty, "Latitude", BindingMode.TwoWay)
 
-                        (EntryCell(Label = "Longitude:", Placeholder = "Longitude", Keyboard = Keyboard.Numeric))
+                        EntryCell(Label = "Longitude:", Placeholder = "Longitude", Keyboard = Keyboard.Numeric)
                         |>| fun x -> x.SetBinding(EntryCell.TextProperty, "Longitude", BindingMode.TwoWay)
 
-                        (EntryCell(Label = "Kilometres", Placeholder = "Kilometres", Keyboard = Keyboard.Numeric))
+                        EntryCell(Label = "Kilometres", Placeholder = "Kilometres", Keyboard = Keyboard.Numeric)
                         |>| fun x -> x.SetBinding(EntryCell.TextProperty, "Kilometres", BindingMode.TwoWay)
 
-                        (EntryCell(Label = "Diffulty Level:", Placeholder = "Walk Diffculty Title"))
-                        |>| fun x -> x.SetBinding(EntryCell.TextProperty, "Diffulty", BindingMode.TwoWay)
+                        EntryCell(Label = "Diffulty Level:", Placeholder = "Walk Difficulty Title")
+                        |>| fun x -> x.SetBinding(EntryCell.TextProperty, "Difficulty", BindingMode.TwoWay)
 
-                        (EntryCell(Label = "ImageUrl:", Placeholder = "Image URL"))]]
+                        EntryCell(Label = "ImageUrl:", Placeholder = "Image URL")
                         |>| fun x -> x.SetBinding(EntryCell.TextProperty, "ImageUrl", BindingMode.TwoWay)
+                    ]
+                ]
 
         this.Content <-
             TableView(

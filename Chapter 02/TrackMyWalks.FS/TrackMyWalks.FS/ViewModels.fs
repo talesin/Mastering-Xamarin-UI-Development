@@ -42,7 +42,7 @@ type WalkBaseViewModel () =
         this.OnPropertyChanged(name)
 
 
-type WalkEntryViewModel () =
+type WalkEntryViewModel () as this =
     inherit WalkBaseViewModel ()
 
     let mutable title: string option = None
@@ -55,6 +55,12 @@ type WalkEntryViewModel () =
     let mutable imageUrl: Uri option = None
 
     let mutable saveCommand: Command option = None
+
+    do
+        this.Title <- "New Walk"
+        this.Difficulty <- "Easy"
+        this.Distance <- 1.0
+
 
     member private this.Save () =
         let item = {
@@ -70,7 +76,7 @@ type WalkEntryViewModel () =
         ()
 
     member private this.Validate () =
-        String.IsNullOrWhiteSpace(this.Title)
+        not <| String.IsNullOrWhiteSpace(this.Title)
 
 
     member this.SaveCommand =
@@ -82,35 +88,35 @@ type WalkEntryViewModel () =
 
     member this.Title
         with get() = getOrDefault title
-        and set(x) = this.SetField(ref title, x, "Title")
+        and set(x) = this.SetField(&title, x, "Title")
 
     member this.Notes
         with get() = getOrDefault notes
-        and set(x) = this.SetField(ref notes, x, "Notes")
+        and set(x) = this.SetField(&notes, x, "Notes")
 
     member this.Latitude
         with get() = getOrDefault latitude
-        and set(x) = this.SetField(ref latitude, x, "Latitude")
+        and set(x) = this.SetField(&latitude, x, "Latitude")
 
     member this.Longitude
         with get() = getOrDefault longitude
-        and set(x) = this.SetField(ref longitude, x, "Longitude")
+        and set(x) = this.SetField(&longitude, x, "Longitude")
 
     member this.Kilometers
         with get() = getOrDefault kilometers
-        and set(x) = this.SetField(ref kilometers, x, "Kilometers")
+        and set(x) = this.SetField(&kilometers, x, "Kilometers")
 
     member this.Difficulty
         with get() = getOrDefault difficulty
-        and set(x) = this.SetField(ref difficulty, x, "Difficulty")
+        and set(x) = this.SetField(&difficulty, x, "Difficulty")
 
     member this.Distance
         with get() = getOrDefault distance
-        and set(x) = this.SetField(ref distance, x, "Distance")
+        and set(x) = this.SetField(&distance, x, "Distance")
 
     member this.ImageUrl
         with get() = getOrDefault imageUrl
-        and set(x) = this.SetField(ref imageUrl, x, "ImageUrl")
+        and set(x) = this.SetField(&imageUrl, x, "ImageUrl")
 
 
 type WalksPageViewModel () =
@@ -138,7 +144,7 @@ type WalksPageViewModel () =
 
     member this.WalkEntries
         with get() = getOrDefault entries
-        and set(x) = this.SetField(ref entries, x, "WalkEntries")
+        and set(x) = this.SetField(&entries, x, "WalkEntries")
 
 
 type WalksTrailViewModel (entry') =
@@ -148,7 +154,7 @@ type WalksTrailViewModel (entry') =
 
     member this.WalkEntry
         with get() = getOrDefault entry
-        and set(x) = this.SetField(ref entry, x, "WalkEntry")
+        and set(x) = this.SetField(&entry, x, "WalkEntry")
 
 type DistTravelledViewModel (entry') =
     inherit WalkBaseViewModel ()
@@ -159,12 +165,12 @@ type DistTravelledViewModel (entry') =
 
     member this.WalkEntry
         with get() = getOrDefault entry
-        and set(x) = this.SetField(ref entry, x, "WalkEntry")
+        and set(x) = this.SetField(&entry, x, "WalkEntry")
 
     member this.Travelled
         with get() = getOrDefault travelled
-        and set(x) = this.SetField(ref travelled, x, "Travelled")
+        and set(x) = this.SetField(&travelled, x, "Travelled")
 
     member this.TimeTaken
         with get() = getOrDefault timeTaken
-        and set(x) = this.SetField(ref timeTaken, x, "TimeTaken")
+        and set(x) = this.SetField(&timeTaken, x, "TimeTaken")
