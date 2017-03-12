@@ -1,5 +1,6 @@
 <WorkspaceItem ctype="Workspace">
   <Items>
-    <Item>TrackMyWalks/02_TrackMyWalks.sln</Item>
+    <Item>TrackMyWalks/TrackMyWalks.sln</Item>
+    <Item>TrackMyWalks.FS/TrackMyWalks.FS.sln</Item>
   </Items>
 </WorkspaceItem>

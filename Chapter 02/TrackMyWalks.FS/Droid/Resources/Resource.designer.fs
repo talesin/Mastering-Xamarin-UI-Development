@@ -23,10 +23,10 @@ namespace TrackMyWalks.FS.Droid
     #nowarn "51" // address-of operator can occur in the code
     #nowarn "1183" // unused 'this' reference
     
-    exception ReturnException64e2b3726d4c455391031cba0bf19b77 of obj
-    exception ReturnNoneException64e2b3726d4c455391031cba0bf19b77
+    exception ReturnException91f5361733e947c0a0785c40504f005b of obj
+    exception ReturnNoneException91f5361733e947c0a0785c40504f005b
     [<AutoOpen>]
-    module FuncConvertFinalOverload64e2b3726d4c455391031cba0bf19b77 =
+    module FuncConvertFinalOverload91f5361733e947c0a0785c40504f005b =
       // This extension member adds to the FuncConvert type and is the last resort member in the method overloading rules. 
       type global.Microsoft.FSharp.Core.FuncConvert with
           /// A utility function to convert function values from tupled to curried form
